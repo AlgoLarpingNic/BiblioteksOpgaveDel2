@@ -17,7 +17,7 @@ public class Library {
     // Hent bog ud fra bog-ID
     public Book getBook(int bookId) {
         for (Book book : books) {
-            if (book.getId() == bookId) {
+            if (book.getEan() == bookId) {
                 return book;
             }
         }
@@ -60,7 +60,7 @@ public class Library {
         Loan loanToRemove = null;
 
         for (Loan loan : loans) {
-            if (loan.getBook().getId() == bookId) {
+            if (loan.getBook().getEan() == bookId) {
                 loanToRemove = loan;
                 break;
             }
