@@ -1,6 +1,6 @@
 public class Main {
 
-    public static void main(String[] args) {
+    public void main() {
 
         // Opret bibliotek
         Library library = new Library();
@@ -9,22 +9,19 @@ public class Main {
         Book book1 = new Book(
                 "Allan B. Downey",
                 "Think Java",
-                "9781492072508",
-                1
+                "9781492072508"
         );
 
         Book book2 = new Book(
                 "Rachel Cusk",
                 "Omrids",
-                "9788763851664",
-                2
+                "9788763851664"
         );
 
         Book book3 = new Book(
                 "Yuval Noah Harari",
                 "Sapiens",
-                "9780062316097",
-                3
+                "9780062316097"
         );
 
         // Opret medlemmer
