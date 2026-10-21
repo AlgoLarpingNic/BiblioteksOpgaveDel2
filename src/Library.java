@@ -1,13 +1,18 @@
+import java.awt.print.Book;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Library {
 
-    private ArrayList<Book> books = new ArrayList<>();
+    private ArrayList<Resource> resources = new ArrayList<>();
     private ArrayList<Member> members = new ArrayList<>();
     private ArrayList<Loan> loans = new ArrayList<>();
+    private Loan loan;
+    private Resource resource;
+    
 
-    public void addBook(Book book) {
-        books.add(book);
+    public void addResource(Resource resource) {
+        resources.add(resource);
     }
 
     public void addMember(Member member) {
@@ -15,10 +20,10 @@ public class Library {
     }
 
     // Hent bog ud fra bog-ID
-    public Book getBook(int bookId) {
-        for (Book book : books) {
-            if (book.getEan() == bookId) {
-                return book;
+    public Resource getResource(String isbn) {
+        for (Resource resource : resources) {
+            if (resource.getIdentifier().equals(isbn)) {
+                return resource;
             }
         }
 
@@ -37,37 +42,35 @@ public class Library {
     }
 
     // Lån bog
-    public boolean loanBook(int bookId, int memberId) {
+    public boolean loanResource(String resourceIdentifier, int memberId) {
 
-        Book book = getBook(bookId);
         Member member = getMember(memberId);
 
-        if (book == null || member == null || !book.isAvailable()) {
+        if (resource == null || member == null || !loan.isAvailable()) {
             return false;
         }
+        loanResource(resourceIdentifier, memberId);
 
-        book.loanBook(member);
-
-        Loan loan = new Loan(book, member);
+        Loan loan = new Loan(resource, member);
         loans.add(loan);
 
         return true;
     }
 
     // Aflever bog
-    public boolean returnBook(int bookId) {
+    public boolean returnResource(String identifier) {
 
         Loan loanToRemove = null;
 
         for (Loan loan : loans) {
-            if (loan.getBook().getEan() == bookId) {
+            if (loan.getResource().getIdentifier() == getResource(identifier).getIdentifier()) {
                 loanToRemove = loan;
                 break;
             }
         }
 
         if (loanToRemove != null) {
-            loanToRemove.getBook().returnBook();
+            Objects.requireNonNull(loanToRemove.getResource());
             loans.remove(loanToRemove);
 
             return true;
@@ -90,8 +93,8 @@ public class Library {
         return memberLoans;
     }
 
-    public ArrayList<Book> getBooks() {
-        return books;
+    public ArrayList<Resource> getResources() {
+        return resources;
     }
 
     public ArrayList<Member> getMembers() {
