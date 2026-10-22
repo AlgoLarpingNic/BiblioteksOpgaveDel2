@@ -1,12 +1,18 @@
 public class Book extends Resource {
-    String isbn;
+    private final int pages;
 
-    public Book(String creator, String title, String identifier) {
-        super(creator, title, identifier);
-        this.isbn = identifier;
+    public Book(String author, String title, String isbn, int pages) {
+        super(author, title, isbn);
+        this.pages = pages;
     }
 
-    public String getIdentifier() {
-        return isbn;
+    public int getPages() {
+        return pages;
+    }
+
+    @Override
+    public String toString() {
+        return getCreator() + "; " + getTitle() + "; isbn " + getIdentifier()
+                + "; (" + pages + " sider)";
     }
 }
