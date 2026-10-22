@@ -7,37 +7,26 @@ public class ConsoleUI {
     }
 
     public void run() {
-
         boolean running = true;
 
         while (running) {
-
             showMenu();
-
 
             int choice = Integer.parseInt(
                     IO.readln("Indtast valg: ")
             );
 
             switch (choice) {
-
                 case 1 -> borrowResource();
-
                 case 2 -> returnResource();
-
                 case 3 -> showLoans();
-
                 case 0 -> running = false;
-
-                default -> IO.println(
-                        "Ugyldigt valg. Prøv igen."
-                );
+                default -> IO.println("Ugyldigt valg. Prøv igen.");
             }
         }
     }
 
     private void showMenu() {
-
         IO.println();
         IO.println("1. Lån");
         IO.println("2. Aflever");
@@ -46,13 +35,12 @@ public class ConsoleUI {
         IO.println();
     }
 
-    // Opgave 5/6/7: Lån en bog
     private void borrowResource() {
         IO.println(library.getMembers());
         int memberId = Integer.parseInt(
                 IO.readln("Indtast medlemsnummer: ")
         );
-        String isbn = IO.readln("Indtast bog id: ");
+        String isbn = IO.readln("Indtast ressource id/isbn: ");
         IO.println(library.getResource(isbn));
 
         if (library.loanResource(isbn, memberId)) {
@@ -62,10 +50,9 @@ public class ConsoleUI {
         }
     }
 
-    // Opgave 8/9: Aflever en bog
     private void returnResource() {
         IO.println(library.getResources());
-        String isbn = IO.readln("Indtast bog isbn: ");
+        String isbn = IO.readln("Indtast ressource isbn/id: ");
 
         if (library.returnResource(isbn)) {
             IO.println("Aflevering registreret");
@@ -74,7 +61,6 @@ public class ConsoleUI {
         }
     }
 
-    // Opgave 10/11: Vis lån for et medlem
     private void showLoans() {
         IO.println(library.getMembers());
         int memberId = Integer.parseInt(
@@ -86,11 +72,9 @@ public class ConsoleUI {
         if (loans.isEmpty()) {
             IO.println("Ingen udlån");
         } else {
-
             for (Loan loan : loans) {
                 IO.println(loan);
             }
         }
     }
-
 }

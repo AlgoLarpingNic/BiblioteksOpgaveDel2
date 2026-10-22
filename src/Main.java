@@ -1,6 +1,6 @@
 public class Main {
 
-    public void main() {
+    public static void main(String[] args) {
 
         // Opret bibliotek
         Library library = new Library();
@@ -40,10 +40,10 @@ public class Main {
                 333
         );
 
-        // Tilføj bøger til biblioteket
-        library.addBook(book1);
-        library.addBook(book2);
-        library.addBook(book3);
+        // Tilføj ressourcer til biblioteket
+        library.addResource(book1);
+        library.addResource(book2);
+        library.addResource(book3);
 
         // Tilføj medlemmer til biblioteket
         library.addMember(member1);

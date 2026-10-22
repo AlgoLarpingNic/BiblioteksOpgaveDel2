@@ -9,10 +9,10 @@ public abstract class Resource {
         this.identifier = identifier;
     }
 
-    //getters
     public String getCreator() {
         return creator;
     }
+
     public String getTitle() {
         return title;
     }
