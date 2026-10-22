@@ -1,4 +1,3 @@
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -7,10 +6,8 @@ public class Library {
     private ArrayList<Resource> resources = new ArrayList<>();
     private ArrayList<Member> members = new ArrayList<>();
     private ArrayList<Loan> loans = new ArrayList<>();
-    private Loan loan;
-    private Resource resource;
-    
 
+    //add metoder til oprettelse af ressourcer og members
     public void addResource(Resource resource) {
         resources.add(resource);
     }
@@ -20,13 +17,12 @@ public class Library {
     }
 
     // Hent bog ud fra bog-ID
-    public Resource getResource(String isbn) {
+    public Resource getResource(String identifier) {
         for (Resource resource : resources) {
-            if (resource.getIdentifier().equals(isbn)) {
+            if (resource.getIdentifier().equals(identifier)) {
                 return resource;
             }
         }
-
         return null;
     }
 
@@ -37,60 +33,7 @@ public class Library {
                 return member;
             }
         }
-
         return null;
-    }
-
-    // Lån bog
-    public boolean loanResource(String resourceIdentifier, int memberId) {
-
-        Member member = getMember(memberId);
-
-        if (resource == null || member == null || !loan.isAvailable()) {
-            return false;
-        }
-        loanResource(resourceIdentifier, memberId);
-
-        Loan loan = new Loan(resource, member);
-        loans.add(loan);
-
-        return true;
-    }
-
-    // Aflever bog
-    public boolean returnResource(String identifier) {
-
-        Loan loanToRemove = null;
-
-        for (Loan loan : loans) {
-            if (loan.getResource().getIdentifier() == getResource(identifier).getIdentifier()) {
-                loanToRemove = loan;
-                break;
-            }
-        }
-
-        if (loanToRemove != null) {
-            Objects.requireNonNull(loanToRemove.getResource());
-            loans.remove(loanToRemove);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    // Find alle lån for et bestemt medlem
-    public ArrayList<Loan> findLoansByMemberId(int memberId) {
-
-        ArrayList<Loan> memberLoans = new ArrayList<>();
-
-        for (Loan loan : loans) {
-            if (loan.getMember().getMemberId() == memberId) {
-                memberLoans.add(loan);
-            }
-        }
-
-        return memberLoans;
     }
 
     public ArrayList<Resource> getResources() {
@@ -103,5 +46,72 @@ public class Library {
 
     public ArrayList<Loan> getLoans() {
         return loans;
+    }
+
+    // Lån bog
+    public boolean isResourceloaned(String identifier) {
+        for (Loan loan : loans) {
+            if (loan.getResource().getIdentifier().equals(identifier)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public LoanResult loanResource(String identifier, int memberId) {
+        Member member = getMember(memberId);
+        if (member == null) {
+            return LoanResult.MEMBER_NOT_FOUND;
+        }
+
+        Resource resource = getResource(identifier);
+        if (resource == null) {
+            return LoanResult.RESOURCE_NOT_FOUND;
+        }
+
+        if (isResourceloaned(identifier)) {
+            return LoanResult.RESOURCE_NOT_AVAILABLE;
+        }
+        Loan loan = new Loan(resource, member);
+        loans.add(loan);
+        return LoanResult.SUCCESS;
+    }
+
+    // Aflever <objekt/matriale/resource>
+    public boolean returnResource(String identifier) {
+        Loan loanToRemove = null;
+        for (Loan loan : loans) {
+            if (loan.getResource().getIdentifier().equals(identifier)) {
+                loanToRemove = loan;
+                break;
+            }
+        }
+
+        if (loanToRemove != null) {
+            loans.remove(loanToRemove);
+            return true;
+        }
+        return false;
+    }
+
+    // Find alle lån for et bestemt medlem
+    public ArrayList<Loan> findLoansByMemberId(int memberId) {
+        ArrayList<Loan> memberLoans = new ArrayList<>();
+        for (Loan loan : loans) {
+            if (loan.getMember().getMemberId() == memberId) {
+                memberLoans.add(loan);
+            }
+        }
+        return memberLoans;
+    }
+
+    public ArrayList<Loan> findOverdueLoans() {
+        ArrayList<Loan> overdue = new ArrayList<>();
+        for (Loan loan : loans) {
+            if (loan.isOverdue()) {
+                overdue.add(loan);
+            }
+        }
+        return overdue;
     }
 }
