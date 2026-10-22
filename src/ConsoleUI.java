@@ -51,6 +51,8 @@ public class ConsoleUI {
             case RESOURCE_NOT_AVAILABLE -> IO.println("Matrialet er ikke tilgængeligt, formegentlig allerede udlånt");
         }
     }
+
+    // Opgave 8/9: Aflever en bla bla
     private void returnResource() {
         IO.println(library.getResources());
         String identifier = IO.readln("Indtast materiale-id (isbn/ean): ");
@@ -61,8 +63,7 @@ public class ConsoleUI {
             IO.println("Materialet er ikke udlånt eller findes ikke");
         }
     }
-
-    // Opgave 8/9: Aflever en bla bla
+    //vis lån
     private void showLoans() {
         IO.println(library.getMembers());
         int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));

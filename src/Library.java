@@ -16,7 +16,7 @@ public class Library {
         members.add(member);
     }
 
-    // Hent bog ud fra bog-ID
+    // Hent ressource ud fra identifier
     public Resource getResource(String identifier) {
         for (Resource resource : resources) {
             if (resource.getIdentifier().equals(identifier)) {
