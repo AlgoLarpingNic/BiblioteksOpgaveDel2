@@ -5,4 +5,8 @@ public class AudioBook extends Resource {
         super(author, title, identifier);
         this.isbn = identifier;
     }
+
+    public String getIsbn() {
+        return isbn;
+    }
 }

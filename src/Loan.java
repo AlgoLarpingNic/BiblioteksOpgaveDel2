@@ -3,21 +3,19 @@ import java.util.Objects;
 
 public class Loan {
     private final Resource resource;
-    private final Member member;
     private final LocalDate loanDate;
-    private Member borrowedBy;
+    private Member member;
     private LocalDate borrowedDate;
 
     public Loan(Resource resource, Member member) {
         this.resource = resource;
         this.member = member;
         this.loanDate = LocalDate.now();
-        this.borrowedBy = null;
         this.borrowedDate = null;
     }
 
     public Member getBorrowedBy() {
-        return borrowedBy;
+        return member;
     }
     public LocalDate getBorrowedDate() {
         return borrowedDate;
@@ -31,13 +29,13 @@ public class Loan {
 
     //check availability
     public boolean isAvailable() {
-        return borrowedBy == null;
+        return member == null;
     }
 
     //lån-objekt-funktion
     public boolean loanMaterial(Member member) {
         if (isAvailable()) {
-            borrowedBy = member;
+            this.member = member;
             borrowedDate = LocalDate.now();
             return true;
         }
@@ -46,7 +44,7 @@ public class Loan {
 
     //afleveringsfunktion
     public void returnMaterial() {
-        borrowedBy = null;
+        member = null;
         borrowedDate = null;
     }
 
@@ -63,23 +61,23 @@ public class Loan {
         }
         //objekt = o
         Resource object = (Resource) o;
-        return isbn == object.isbn && Objects.equals(isbn, object.isbn);
+        return object.getIdentifier() == object.getIdentifier() && Objects.equals((resource.getIdentifier()), object.getIdentifier());
     }
 
     @Override
     public String toString() {
-        return creator + "; " + title +
-                "; isbn " + isbn +
-                "; (" + ean + ")";
+        return resource.getCreator() + "; " + resource.getTitle() +
+                "; isbn " + resource.getIdentifier() +
+                "; (" + resource.getIdentifier() + ")" + member;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isbn, ean);
+        return Objects.hash(resource.getIdentifier(), resource.getIdentifier());
     }
 
-    public Book getBook() {
-        return book;
+    public Resource getResource() {
+        return resource;
     }
 
     public Member getMember() {
@@ -88,13 +86,5 @@ public class Loan {
 
     public LocalDate getLoanDate() {
         return loanDate;
-    }
-
-
-    @Override
-    public String toString() {
-        return book.toString() +
-                "\n" + member.toString() +
-                ",\nafleveringsfrist: " + getDueDate();
     }
 }

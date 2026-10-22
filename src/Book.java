@@ -6,5 +6,7 @@ public class Book extends Resource {
         this.isbn = identifier;
     }
 
-
+    public String getIdentifier() {
+        return isbn;
+    }
 }

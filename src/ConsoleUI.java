@@ -21,9 +21,9 @@ public class ConsoleUI {
 
             switch (choice) {
 
-                case 1 -> borrowBook();
+                case 1 -> borrowResource();
 
-                case 2 -> returnBook();
+                case 2 -> returnResource();
 
                 case 3 -> showLoans();
 
@@ -47,17 +47,15 @@ public class ConsoleUI {
     }
 
     // Opgave 5/6/7: Lån en bog
-    private void borrowBook() {
+    private void borrowResource() {
         IO.println(library.getMembers());
         int memberId = Integer.parseInt(
                 IO.readln("Indtast medlemsnummer: ")
         );
-        IO.println(library.getBooks());
-        int bookId = Integer.parseInt(
-                IO.readln("Indtast bog id: ")
-        );
+        String isbn = IO.readln("Indtast bog id: ");
+        IO.println(library.getResource(isbn));
 
-        if (library.loanBook(bookId, memberId)) {
+        if (library.loanResource(isbn, memberId)) {
             IO.println("Lån registreret");
         } else {
             IO.println("Der er sket en fejl");
@@ -65,13 +63,11 @@ public class ConsoleUI {
     }
 
     // Opgave 8/9: Aflever en bog
-    private void returnBook() {
-        IO.println(library.getBooks());
-        int bookId = Integer.parseInt(
-                IO.readln("Indtast bog id: ")
-        );
+    private void returnResource() {
+        IO.println(library.getResources());
+        String isbn = IO.readln("Indtast bog isbn: ");
 
-        if (library.returnBook(bookId)) {
+        if (library.returnResource(isbn)) {
             IO.println("Aflevering registreret");
         } else {
             IO.println("Der er sket en fejl");

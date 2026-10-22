@@ -6,4 +6,7 @@ public class Movie extends Resource{
         this.ean = identifier;
     }
 
+    public String getEan() {
+        return ean;
+    }
 }
