@@ -11,9 +11,7 @@ public class ConsoleUI {
         while (running) {
 
             showMenu();
-            int choice = Integer.parseInt(
-                    IO.readln("Indtast valg: "));
-
+            int choice = Integer.parseInt(IO.readln("Indtast valg: "));
             switch (choice) {
                 case 1 -> borrowResource();
                 case 2 -> returnResource();
