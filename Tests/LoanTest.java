@@ -9,6 +9,7 @@ public class LoanTest {
     Book book;
     Member member;
     Loan loan;
+    
     @BeforeEach
     void setupLoan(){
         book = new Book("Ben Dover", "the deep", "80085", 420);
