@@ -11,16 +11,15 @@ public class ConsoleUI {
         while (running) {
             showMenu();
 
-            int choice = Integer.parseInt(
-                    IO.readln("Indtast valg: ")
-            );
+            int choice = Integer.parseInt(IO.readln("Indtast valg: "));
 
             switch (choice) {
-                case 1 -> borrowResource();
-                case 2 -> returnResource();
-                case 3 -> showLoans();
-                case 0 -> running = false;
-                default -> IO.println("Ugyldigt valg. Prøv igen.");
+            case 1 -> borrowResource();
+            case 2 -> returnResource();
+            case 3 -> showLoans();
+            case 4 -> showOverdueLoans();
+            case 0 -> running = false;
+            default -> IO.println("Ugyldigt valg. Prøv igen.");
             }
         }
     }
