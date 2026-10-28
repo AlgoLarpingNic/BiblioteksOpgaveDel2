@@ -1,12 +1,12 @@
 public class AudioBook extends Resource {
-    String isbn;
+    private final int lengthMinutes;
 
-    public AudioBook(String author, String title, String identifier) {
-        super(author, title, identifier);
-        this.isbn = identifier;
+    public AudioBook(String author, String title, String isbn, int lengthMinutes) {
+        super(author, title, isbn);
+        this.lengthMinutes = lengthMinutes;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public int getLengthMinutes() {
+        return lengthMinutes;
     }
 }

@@ -1,57 +1,27 @@
-public class Main {
+void main() {
+    StandardLoanPolicy standardLoanPolicy = new StandardLoanPolicy();
+    Library library = new Library(standardLoanPolicy);
 
-    public static void main(String[] args) {
+    // Bøger
+    library.addResource(new Book("Allan B. Drown inh",  "Think Java",   "0001", 320));
+    library.addResource(new Book("Rachel Cusk",         "Omrids",       "0002", 256));
+    library.addResource(new Book("Edith Inshide",       "Sapiens",      "0003", 443));
 
-        // Opret bibliotek
-        Library library = new Library();
+    // Lydbøger
+    library.addResource(new AudioBook("Edith Inshide",  "Sapiens",      "0004", 900));
 
-        // Opret bøger
-        Book book1 = new Book(
-                "Allan B. Downey",
-                "Think Java",
-                "9781492072508"
-        );
+    // Film
+    library.addResource(new Movie("John Issin",     "Toy Story",        "0005", "Pixar", 81));
 
-        Book book2 = new Book(
-                "Rachel Cusk",
-                "Omrids",
-                "9788763851664"
-        );
+    // Videospil
+    library.addResource(new VideoGame("Nintendo",   "The Legend of Zelda",  "0006", "Nintendo Switch"));
 
-        Book book3 = new Book(
-                "Yuval Noah Harari",
-                "Sapiens",
-                "9780062316097"
-        );
+    // Medlemmer
+    library.addMember(new Member("Thorkild Hansen", 111));
+    library.addMember(new Member("Lise Andersen", 222));
+    library.addMember(new Member("Peter Larsen", 333));
 
-        // Opret medlemmer
-        Member member1 = new Member(
-                "Thorkild Hansen",
-                111
-        );
-
-        Member member2 = new Member(
-                "Lise Andersen",
-                222
-        );
-
-        Member member3 = new Member(
-                "Peter Larsen",
-                333
-        );
-
-        // Tilføj ressourcer til biblioteket
-        library.addResource(book1);
-        library.addResource(book2);
-        library.addResource(book3);
-
-        // Tilføj medlemmer til biblioteket
-        library.addMember(member1);
-        library.addMember(member2);
-        library.addMember(member3);
-
-        // Start brugerfladen
-        ConsoleUI consoleUI = new ConsoleUI(library);
-        consoleUI.run();
-    }
+    // Start brugerfladen
+    ConsoleUI consoleUI = new ConsoleUI(library);
+    consoleUI.run();
 }

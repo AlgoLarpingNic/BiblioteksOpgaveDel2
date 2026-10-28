@@ -1,13 +1,12 @@
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class Loan {
+    private final Member member;
     private final Resource resource;
     private final LocalDate loanDate;
-    private Member member;
-    private LocalDate borrowedDate;
+    private final LocalDate dueDate;
 
-    public Loan(Resource resource, Member member) {
+    public Loan(Resource resource, Member member, LocalDate dueDate) {
         this.resource = resource;
         this.member = member;
         this.loanDate = LocalDate.now();
