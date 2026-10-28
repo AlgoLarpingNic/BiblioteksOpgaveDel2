@@ -6,13 +6,8 @@ public class Book extends Resource {
         this.pages = pages;
     }
 
-    public int getPages() {
-        return pages;
-    }
-
     @Override
-    public String toString() {
-        return getCreator() + "; " + getTitle() + "; isbn " + getIdentifier()
-                + "; (" + pages + " sider)";
+    public String getIdentifier() {
+        return isbn;
     }
 }
