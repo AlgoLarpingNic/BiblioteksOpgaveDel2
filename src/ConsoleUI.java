@@ -36,9 +36,8 @@ public class ConsoleUI {
 
     private void borrowResource() {
         IO.println(library.getMembers());
-        int memberId = Integer.parseInt(
-                IO.readln("Indtast medlemsnummer: ")
-        );
+        int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));
+
         String isbn = IO.readln("Indtast ressource id/isbn: ");
         IO.println(library.getResource(isbn));
 
@@ -56,7 +55,7 @@ public class ConsoleUI {
 
     private void returnResource() {
         IO.println(library.getResources());
-        String isbn = IO.readln("Indtast ressource isbn/id: ");
+        String identifier = IO.readln("Indtast ressource isbn/id: ");
 
         if (library.returnResource(identifier)) {
             IO.println("Aflevering registreret");
