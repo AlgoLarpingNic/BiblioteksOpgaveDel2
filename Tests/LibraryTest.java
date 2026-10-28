@@ -10,13 +10,15 @@ public class LibraryTest {
     Book book;
     Library library;
     Loan loan;
+    LoanPolicy loanPolicy;
 
+    LocalDate dueDate = LocalDate.now().plusDays(30);
     @BeforeEach
     void setupLibrary() {
         book = new Book("Ben Dover", "the deep", "80085", 420);
         member = new Member("Suk yoo hoff", 111);
-        library = new Library();
-        loan = new Loan(book, member);
+        library = new Library(loanPolicy);
+        loan = new Loan(book, member, dueDate);
 
     }
 

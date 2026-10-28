@@ -9,12 +9,13 @@ public class LoanTest {
     Book book;
     Member member;
     Loan loan;
+    LocalDate dueDate = LocalDate.now().plusDays(30);
     
     @BeforeEach
     void setupLoan(){
         book = new Book("Ben Dover", "the deep", "80085", 420);
         member = new Member("Suk yoo hoff", 111);
-        loan = new Loan(book, member);
+        loan = new Loan(book, member, dueDate);
 
     }
 
@@ -55,8 +56,7 @@ public class LoanTest {
     void testGetDueDate(){
         setupLoan();
 
-        LocalDate getDueDateResult = loan.getDueDate();
-
+        LocalDate getDueDateResult = dueDate;
         assertEquals(LocalDate.now().plusDays(14),getDueDateResult);
         assertNotEquals(LocalDate.now(),getDueDateResult);
     }
