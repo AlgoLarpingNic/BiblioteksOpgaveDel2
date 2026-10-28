@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -6,6 +7,12 @@ public class Library {
     private ArrayList<Resource> resources = new ArrayList<>();
     private ArrayList<Member> members = new ArrayList<>();
     private ArrayList<Loan> loans = new ArrayList<>();
+    private LoanPolicy loanPolicy;
+
+
+    public Library(LoanPolicy loanPolicy) {
+        this.loanPolicy = loanPolicy;
+    }
 
     //add metoder til oprettelse af ressourcer og members
     public void addResource(Resource resource) {
@@ -68,12 +75,19 @@ public class Library {
         if (resource == null) {
             return LoanResult.RESOURCE_NOT_FOUND;
         }
-
-        if (isResourceloaned(identifier)) {
+        if (loanPolicy.canLoan(resource, member, loans)) {
             return LoanResult.RESOURCE_NOT_AVAILABLE;
         }
-        Loan loan = new Loan(resource, member);
+
+        if (!loanPolicy.canLoan(resource, member, loans)) {
+            return LoanResult.NOT_PERMITTED;
+        }
+
+
+        LocalDate dueDate = loanPolicy.calculateDueDate(resource);
+        Loan loan = new Loan(resource, member, dueDate);
         loans.add(loan);
+
         return LoanResult.SUCCESS;
     }
 

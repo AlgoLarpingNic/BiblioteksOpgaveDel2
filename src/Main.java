@@ -1,5 +1,6 @@
 void main() {
-    Library library = new Library();
+    StandardLoanPolicy standardLoanPolicy = new StandardLoanPolicy();
+    Library library = new Library(standardLoanPolicy);
 
     // Bøger
     library.addResource(new Book("Allan B. Drown inh",  "Think Java",   "0001", 320));
@@ -10,7 +11,7 @@ void main() {
     library.addResource(new AudioBook("Edith Inshide",  "Sapiens",      "0004", 900));
 
     // Film
-    library.addResource(new Movie("John Issin",     "Toy Story",            "0005", "Pixar", 81));
+    library.addResource(new Movie("John Issin",     "Toy Story",        "0005", "Pixar", 81));
 
     // Videospil
     library.addResource(new VideoGame("Nintendo",   "The Legend of Zelda",  "0006", "Nintendo Switch"));
