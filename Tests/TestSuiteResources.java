@@ -16,6 +16,8 @@ LoanPolicy loanPolicy;
 
 Library library;
 
+LocalDate duedate = LocalDate.now().plusDays(30);
+
     //CLASSES
     @BeforeEach
     void constructor() {
@@ -24,7 +26,7 @@ Library library;
         movie = new Movie("John Issin", "Toy Story", "0005", "Pixar", 81);
         videoGame = new VideoGame("Nintendo", "The Legend of Zelda", "0006", "Nintendo Switch");
         member = new Member("Mike Oxlong", 69);
-        loan = new Loan(videoGame, member, dueDate);
+        loan = new Loan(videoGame, member, duedate);
         library = new Library(loanPolicy);
     }
 
@@ -46,9 +48,9 @@ Library library;
     void loanDateMemberRegister() {
         assertEquals(loan.getMember(), member);
         assertEquals(loan.getMember().getMemberId(), member.getMemberId());
-        assertEquals(LocalDate.now().plusDays(14), loan.getDueDate());
+        assertEquals(LocalDate.now().plusDays(14), duedate);
 
-        Loan loanTest = new Loan(movie, member);
+        Loan loanTest = new Loan(movie, member, duedate);
         loanTest.getLoanDate().minusDays(15);
 
         boolean loanTestBool = true;
