@@ -1,11 +1,12 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Library {
 
-    private ArrayList<Resource> resources = new ArrayList<>();
-    private ArrayList<Member> members = new ArrayList<>();
-    private ArrayList<Loan> loans = new ArrayList<>();
+    private List<Resource> resources = new ArrayList<>();
+    private List<Member> members = new ArrayList<>();
+    private List<Loan> loans = new ArrayList<>();
     private LoanPolicy loanPolicy;
 
 
@@ -97,8 +98,8 @@ public class Library {
     }
 
     // Find alle lån for et bestemt medlem
-    public ArrayList<Loan> findLoansByMemberId(int memberId) {
-        ArrayList<Loan> memberLoans = new ArrayList<>();
+    public List<Loan> findLoansByMemberId(int memberId) {
+        List<Loan> memberLoans = new ArrayList<>();
         for (Loan loan : loans) {
             if (loan.getMember().getMemberId() == memberId) {
                 memberLoans.add(loan);
@@ -117,15 +118,15 @@ public class Library {
         return overdue;
     }
 
-    public ArrayList<Resource> getResources() {
+    public List<Resource> getResources() {
         return resources;
     }
 
-    public ArrayList<Member> getMembers() {
+    public List<Member> getMembers() {
         return members;
     }
 
-    public ArrayList<Loan> getLoans() {
+    public List<Loan> getLoans() {
         return loans;
     }
 }
