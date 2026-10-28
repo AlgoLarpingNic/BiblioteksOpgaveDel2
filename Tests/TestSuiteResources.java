@@ -12,6 +12,7 @@ VideoGame videoGame;
 
 Member member;
 Loan loan;
+LoanPolicy loanPolicy;
 
 Library library;
 
@@ -23,8 +24,8 @@ Library library;
         movie = new Movie("John Issin", "Toy Story", "0005", "Pixar", 81);
         videoGame = new VideoGame("Nintendo", "The Legend of Zelda", "0006", "Nintendo Switch");
         member = new Member("Mike Oxlong", 69);
-        loan = new Loan(videoGame, member);
-        library = new Library();
+        loan = new Loan(videoGame, member, dueDate);
+        library = new Library(loanPolicy);
     }
 
     @Test

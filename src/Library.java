@@ -116,4 +116,16 @@ public class Library {
         }
         return overdue;
     }
+
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
+
+    public ArrayList<Member> getMembers() {
+        return members;
+    }
+
+    public ArrayList<Loan> getLoans() {
+        return loans;
+    }
 }
