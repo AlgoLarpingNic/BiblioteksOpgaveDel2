@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Library {
@@ -5,6 +6,7 @@ public class Library {
     private ArrayList<Resource> resources = new ArrayList<>();
     private ArrayList<Member> members = new ArrayList<>();
     private ArrayList<Loan> loans = new ArrayList<>();
+    private LoanPolicy loanPolicy;
 
 
     public Library(LoanPolicy loanPolicy) {
@@ -40,29 +42,35 @@ public class Library {
         return null;
     }
 
+    public boolean isResourceLoaned(String identifier) {
+        for (Loan loan : loans) {
+            if (loan.getResource().getIdentifier().equals(identifier)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Lån ressource
-    public boolean loanResource(String resourceIdentifier, int memberId) {
-        Resource resource = getResource(resourceIdentifier);
+    public LoanResult loanResource(String identifier, int memberId) {
         Member member = getMember(memberId);
         if (member == null) {
             return LoanResult.MEMBER_NOT_FOUND;
         }
 
-        if (resource == null || member == null) {
-            return false;
+        Resource resource = getResource(identifier);
+        if (resource == null) {
+            return LoanResult.RESOURCE_NOT_FOUND;
         }
 
-        // Tjek om ressourcen allerede er udlånt
-        for (Loan loan : loans) {
-            if (loan.getResource().getIdentifier().equals(resourceIdentifier)) {
-                return false; // Allerede udlånt
-            }
+        if (isResourceLoaned(identifier)) {
+            return LoanResult.RESOURCE_NOT_AVAILABLE;
         }
 
+        // Spørg policy om lånet er tilladt
         if (!loanPolicy.canLoan(resource, member, loans)) {
             return LoanResult.NOT_PERMITTED;
         }
-
 
         LocalDate dueDate = loanPolicy.calculateDueDate(resource);
         Loan loan = new Loan(resource, member, dueDate);
