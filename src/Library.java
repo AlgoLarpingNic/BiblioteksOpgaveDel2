@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Library {
 
-    private List<Resource> resources = new ArrayList<>();
-    private List<Member> members = new ArrayList<>();
-    private List<Loan> loans = new ArrayList<>();
-    private LoanPolicy loanPolicy;
+    private final List<Resource> resources = new ArrayList<>();
+    private final List<Member> members = new ArrayList<>();
+    private final List<Loan> loans = new ArrayList<>();
+    private final LoanPolicy loanPolicy;
 
 
     public Library(LoanPolicy loanPolicy) {

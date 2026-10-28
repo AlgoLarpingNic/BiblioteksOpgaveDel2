@@ -19,7 +19,7 @@ public class AalborgLoanPolicy implements LoanPolicy {
                 }
             }
         }
-        return eanCount < eanLoanLimit;
+        return eanCount <= eanLoanLimit;
     }
 
     @Override
