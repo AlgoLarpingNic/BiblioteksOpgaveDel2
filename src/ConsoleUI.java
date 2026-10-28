@@ -9,14 +9,16 @@ public class ConsoleUI {
         boolean running = true;
 
         while (running) {
-
             showMenu();
-            int choice = Integer.parseInt(IO.readln("Indtast valg: "));
+
+            int choice = Integer.parseInt(
+                    IO.readln("Indtast valg: ")
+            );
+
             switch (choice) {
                 case 1 -> borrowResource();
                 case 2 -> returnResource();
                 case 3 -> showLoans();
-                case 4 -> showOverdueLoans();
                 case 0 -> running = false;
                 default -> IO.println("Ugyldigt valg. Prøv igen.");
             }
@@ -33,10 +35,13 @@ public class ConsoleUI {
         IO.println();
     }
 
-    // Opgave 5/6 7: Lån en bog
     private void borrowResource() {
         IO.println(library.getMembers());
-        int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));
+        int memberId = Integer.parseInt(
+                IO.readln("Indtast medlemsnummer: ")
+        );
+        String isbn = IO.readln("Indtast ressource id/isbn: ");
+        IO.println(library.getResource(isbn));
 
         IO.println(library.getResources());
         String identifier = IO.readln("Indtast isbn/ean: ");
@@ -50,10 +55,9 @@ public class ConsoleUI {
         }
     }
 
-    // Opgave 8/9: Aflever en bla bla
     private void returnResource() {
         IO.println(library.getResources());
-        String identifier = IO.readln("Indtast materiale-id (isbn/ean): ");
+        String isbn = IO.readln("Indtast ressource isbn/id: ");
 
         if (library.returnResource(identifier)) {
             IO.println("Aflevering registreret");
@@ -61,7 +65,7 @@ public class ConsoleUI {
             IO.println("Materialet er ikke udlånt eller findes ikke");
         }
     }
-    //vis lån
+
     private void showLoans() {
         IO.println(library.getMembers());
         int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));
@@ -90,5 +94,4 @@ public class ConsoleUI {
             }
         }
     }
-
 }

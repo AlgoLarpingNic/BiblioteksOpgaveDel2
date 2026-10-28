@@ -9,10 +9,4 @@ public class AudioBook extends Resource {
     public int getLengthMinutes() {
         return lengthMinutes;
     }
-
-    @Override
-    public String toString() {
-        return getCreator() + "; " + getTitle() + "; isbn " + getIdentifier()
-                + "; (" + lengthMinutes + " min)";
-    }
 }
