@@ -57,8 +57,8 @@ public class LoanTest {
         setupLoan();
 
         LocalDate getDueDateResult = dueDate;
-        assertEquals(LocalDate.now().plusDays(14),getDueDateResult);
-        assertNotEquals(LocalDate.now(),getDueDateResult);
+        assertEquals(LocalDate.now().plusDays(30), getDueDateResult);
+        assertNotEquals(LocalDate.now(), getDueDateResult);
     }
     @Test
     void testIsOverdue(){

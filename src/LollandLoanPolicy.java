@@ -7,11 +7,10 @@ public class LollandLoanPolicy implements LoanPolicy{
     @Override
     public LocalDate calculateDueDate(Resource resource) {
         if(resource instanceof Book){
-            LocalDate.now().plusDays(45);
+            return LocalDate.now().plusDays(45);
         } else {
-            LocalDate.now().plusDays(30);
+            return LocalDate.now().plusDays(30);
         }
-       return null;
     }
 
     @Override

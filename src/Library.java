@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Library {
 
-    private List<Resource> resources = List.of();
-    private List<Member> members = List.of();
-    private List<Loan> loans = List.of();
-    private LoanPolicy loanPolicy;
+    private final List<Resource> resources = new ArrayList<>();
+    private final List<Member> members = new ArrayList<>();
+    private final List<Loan> loans = new ArrayList<>();
+    private final LoanPolicy loanPolicy;
 
 
     public Library(LoanPolicy loanPolicy) {
@@ -53,30 +53,25 @@ public class Library {
     }
 
     // Lån ressource
-    public LoanResult loanResource(String identifier, int memberId) {
+    public LoanResult loanResource(int memberId, String identifier) {
         Member member = getMember(memberId);
         if (member == null) {
             return LoanResult.MEMBER_NOT_FOUND;
         }
-
         Resource resource = getResource(identifier);
         if (resource == null) {
             return LoanResult.RESOURCE_NOT_FOUND;
         }
-
         if (isResourceLoaned(identifier)) {
             return LoanResult.RESOURCE_NOT_AVAILABLE;
         }
-
         // Spørg policy om lånet er tilladt
         if (!loanPolicy.canLoan(resource, member, loans)) {
             return LoanResult.NOT_PERMITTED;
         }
-
         LocalDate dueDate = loanPolicy.calculateDueDate(resource);
         Loan loan = new Loan(resource, member, dueDate);
         loans.add(loan);
-
         return LoanResult.SUCCESS;
     }
 
@@ -89,7 +84,6 @@ public class Library {
                 break;
             }
         }
-
         if (loanToRemove != null) {
             loans.remove(loanToRemove);
             return true;
@@ -99,7 +93,7 @@ public class Library {
 
     // Find alle lån for et bestemt medlem
     public List<Loan> findLoansByMemberId(int memberId) {
-        List<Loan> memberLoans = List.of();
+        List<Loan> memberLoans = new ArrayList<>();
         for (Loan loan : loans) {
             if (loan.getMember().getMemberId() == memberId) {
                 memberLoans.add(loan);
@@ -109,7 +103,7 @@ public class Library {
     }
 
     public List<Loan> findOverdueLoans() {
-        List<Loan> overdue = List.of();
+        List<Loan> overdue = new ArrayList<>();
         for (Loan loan : loans) {
             if (loan.isOverdue()) {
                 overdue.add(loan);

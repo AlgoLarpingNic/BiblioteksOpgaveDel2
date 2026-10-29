@@ -35,28 +35,22 @@ public class ConsoleUI {
     }
 
     private void borrowResource() {
-        IO.println(library.getMembers());
         int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));
 
-        String isbn = IO.readln("Indtast ressource id/isbn: ");
-        IO.println(library.getResource(isbn));
+        String identifier = IO.readln("Indtast ressource ean/isbn: ");
 
-        IO.println(library.getResources());
-        String identifier = IO.readln("Indtast isbn/ean: ");
-
-        LoanResult result = library.loanResource(identifier, memberId);
+        LoanResult result = library.loanResource(memberId, identifier);
         switch (result) {
-            case SUCCESS -> IO.println("Lån registreret for: " + library.getResource(identifier));
-            case MEMBER_NOT_FOUND -> IO.println("Medlem ikke fundet");
+            case SUCCESS -> IO.println("Lån registreret for: " + library.getMember(memberId) + "ved: " + library.getResource(identifier));
+            case NOT_PERMITTED -> IO.println("Lånet er ikke tilladt ifølge lånereglerne");
+            case MEMBER_NOT_FOUND -> IO.println("Medlem ikke fundet for medlems id: " + memberId);
             case RESOURCE_NOT_FOUND -> IO.println("Intet fundet for indtastning: " + identifier);
             case RESOURCE_NOT_AVAILABLE -> IO.println("Matrialet er ikke tilgængeligt, formegentlig allerede udlånt");
         }
     }
 
     private void returnResource() {
-        IO.println(library.getResources());
         String identifier = IO.readln("Indtast ressource isbn/id: ");
-
         if (library.returnResource(identifier)) {
             IO.println("Aflevering registreret");
         } else {
@@ -65,7 +59,6 @@ public class ConsoleUI {
     }
 
     private void showLoans() {
-        IO.println(library.getMembers());
         int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));
 
         var loans = library.findLoansByMemberId(memberId);

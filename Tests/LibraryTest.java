@@ -17,6 +17,7 @@ public class LibraryTest {
     void setupLibrary() {
         book = new Book("Ben Dover", "the deep", "80085", 420);
         member = new Member("Suk yoo hoff", 111);
+        loanPolicy = new StandardLoanPolicy();
         library = new Library(loanPolicy);
         loan = new Loan(book, member, dueDate);
 
@@ -28,7 +29,7 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        LoanResult result = library.loanResource("80085", 111);
+        LoanResult result = library.loanResource(111, "80085");
 
         assertEquals(LoanResult.SUCCESS, result);
     }
@@ -39,7 +40,7 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        LoanResult result = library.loanResource("80085", 132);
+        LoanResult result = library.loanResource(132, "80085");
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }
@@ -50,7 +51,7 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        LoanResult result = library.loanResource("8==D", 111);
+        LoanResult result = library.loanResource(111, "8==D");
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }
@@ -61,8 +62,8 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        library.loanResource("80085", 111);
-        LoanResult result = library.loanResource("80085", 111);
+        library.loanResource(111, "80085");
+        LoanResult result = library.loanResource(111, "80085");
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }
@@ -73,11 +74,11 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        library.loanResource("80085", 111);
+        library.loanResource(111, "80085");
 
         library.returnResource("80085");
 
-        LoanResult result = library.loanResource("80085", 111);
+        LoanResult result = library.loanResource(111, "80085");
 
         assertEquals(LoanResult.SUCCESS, result);
     }
@@ -88,7 +89,7 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        library.loanResource("80085", 111);
+        library.loanResource(111, "80085");
 
         boolean returnResult = library.returnResource("80085");
 
