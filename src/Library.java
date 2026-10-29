@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Library {
 
-    private List<Resource> resources = List.of();
-    private List<Member> members = List.of();
-    private List<Loan> loans = List.of();
+    private List<Resource> resources = new ArrayList<>();
+    private List<Member> members = new ArrayList<>();
+    private List<Loan> loans = new ArrayList<>();
     private LoanPolicy loanPolicy;
 
 
@@ -99,7 +99,7 @@ public class Library {
 
     // Find alle lån for et bestemt medlem
     public List<Loan> findLoansByMemberId(int memberId) {
-        List<Loan> memberLoans = List.of();
+        List<Loan> memberLoans = new ArrayList<>();
         for (Loan loan : loans) {
             if (loan.getMember().getMemberId() == memberId) {
                 memberLoans.add(loan);
@@ -109,7 +109,7 @@ public class Library {
     }
 
     public List<Loan> findOverdueLoans() {
-        List<Loan> overdue = List.of();
+        List<Loan> overdue = new ArrayList<>();
         for (Loan loan : loans) {
             if (loan.isOverdue()) {
                 overdue.add(loan);
@@ -129,4 +129,5 @@ public class Library {
     public List<Loan> getLoans() {
         return loans;
     }
+
 }

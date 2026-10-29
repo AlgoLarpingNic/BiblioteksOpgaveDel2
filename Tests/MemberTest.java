@@ -8,7 +8,7 @@ public class MemberTest {
     Member member;
     @BeforeEach
     void setupMember() {
-        member = new Member("Mike Oxlong",69);
+        member = new Member("Mike Wazawski",69);
 
     }
     @Test
@@ -20,7 +20,7 @@ public class MemberTest {
         String resultName = member.getName();
 
         //assert
-        assertEquals("Mike Oxlong",resultName);
+        assertEquals("Mike Wazawski",resultName);
     }
 
     @Test

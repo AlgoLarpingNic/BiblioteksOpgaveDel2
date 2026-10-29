@@ -16,7 +16,8 @@ public class LibraryTest {
     @BeforeEach
     void setupLibrary() {
         book = new Book("Ben Dover", "the deep", "80085", 420);
-        member = new Member("Suk yoo hoff", 111);
+        member = new Member("Mike Wazawski", 111);
+        loanPolicy = new StandardLoanPolicy();
         library = new Library(loanPolicy);
         loan = new Loan(book, member, dueDate);
 
@@ -50,7 +51,7 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        LoanResult result = library.loanResource("8==D", 111);
+        LoanResult result = library.loanResource("False", 111);
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }
