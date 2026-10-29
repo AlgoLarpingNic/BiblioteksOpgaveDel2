@@ -38,9 +38,6 @@ public class ConsoleUI {
         IO.println(library.getMembers());
         int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));
 
-        String isbn = IO.readln("Indtast ressource id/isbn: ");
-        IO.println(library.getResource(isbn));
-
         IO.println(library.getResources());
         String identifier = IO.readln("Indtast isbn/ean: ");
 

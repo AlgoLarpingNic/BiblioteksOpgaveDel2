@@ -16,7 +16,7 @@ LoanPolicy loanPolicy;
 
 Library library;
 
-LocalDate duedate = LocalDate.now().plusDays(30);
+LocalDate duedate = LocalDate.now().plusDays(14);
 
     //CLASSES
     @BeforeEach
@@ -27,6 +27,7 @@ LocalDate duedate = LocalDate.now().plusDays(30);
         videoGame = new VideoGame("Nintendo", "The Legend of Zelda", "0006", "Nintendo Switch");
         member = new Member("Mike Oxlong", 69);
         loan = new Loan(videoGame, member, duedate);
+        loanPolicy = new StandardLoanPolicy();
         library = new Library(loanPolicy);
     }
 
@@ -150,7 +151,7 @@ LocalDate duedate = LocalDate.now().plusDays(30);
         library.addMember(member);
         library.addResource(book);
 
-        LoanResult result = library.loanResource("8==D", 69);
+        LoanResult result = library.loanResource("FALSE", 69);
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }
@@ -190,6 +191,15 @@ LocalDate duedate = LocalDate.now().plusDays(30);
         boolean returnResult = library.returnResource("0001");
 
         assertTrue(returnResult);
+    }
+    @Test
+    void testGetMember(){
+        Member member1 = new Member("Mike Wazawski", 420);
+        library.addMember(member);
+        library.addMember(member1);
+        Member result = library.getMember(69);
+
+        assertEquals(member, result);
     }
 
 
