@@ -51,7 +51,7 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        LoanResult result = library.loanResource("False", 111);
+        LoanResult result = library.loanResource(111, "False");
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }

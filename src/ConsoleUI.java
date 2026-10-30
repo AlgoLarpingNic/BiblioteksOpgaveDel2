@@ -41,7 +41,7 @@ public class ConsoleUI {
 
         LoanResult result = library.loanResource(memberId, identifier);
         switch (result) {
-            case SUCCESS -> IO.println("Lån registreret for: " + library.getMember(memberId) + "ved: " + library.getResource(identifier));
+            case SUCCESS -> IO.println("Lån registreret for: " + library.getMember(memberId) + "\nVed: " + library.getResource(identifier));
             case NOT_PERMITTED -> IO.println("Lånet er ikke tilladt ifølge lånereglerne");
             case MEMBER_NOT_FOUND -> IO.println("Medlem ikke fundet for medlems id: " + memberId);
             case RESOURCE_NOT_FOUND -> IO.println("Intet fundet for indtastning: " + identifier);
