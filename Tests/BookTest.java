@@ -9,7 +9,7 @@ public class BookTest {
 
     @BeforeEach
     void setup() {
-        book = new Book("Mike Litoris", "About you", "8008", 67);
+        book = new Book("Anders", "About you", "8008", 67);
     }
 
     @Test
@@ -19,7 +19,7 @@ public class BookTest {
         String creatorResult = book.getCreator();
 
         //assert
-        assertEquals("Mike Litoris", creatorResult);
+        assertEquals("Anders", creatorResult);
         assertNotNull(book.getCreator(), creatorResult);
 
     }

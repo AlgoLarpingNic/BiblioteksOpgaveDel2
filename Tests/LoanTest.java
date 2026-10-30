@@ -9,12 +9,12 @@ public class LoanTest {
     Book book;
     Member member;
     Loan loan;
-    LocalDate dueDate = LocalDate.now().plusDays(30);
+    LocalDate dueDate = LocalDate.now().plusDays(14);
     
     @BeforeEach
     void setupLoan(){
-        book = new Book("Ben Dover", "the deep", "80085", 420);
-        member = new Member("Suk yoo hoff", 111);
+        book = new Book("Ben Clover", "Rolling off the deep end", "80085", 420);
+        member = new Member("Mike Wazawski", 111);
         loan = new Loan(book, member, dueDate);
 
     }
