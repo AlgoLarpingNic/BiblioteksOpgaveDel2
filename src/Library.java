@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
-
     private final List<Resource> resources = new ArrayList<>();
     private final List<Member> members = new ArrayList<>();
     private final List<Loan> loans = new ArrayList<>();
@@ -123,5 +122,4 @@ public class Library {
     public List<Loan> getLoans() {
         return loans;
     }
-
 }

@@ -1,5 +1,8 @@
 void main() {
+    Path path = Path.of("savedResources.csv");
+    String delimiter = ",";
     StandardLoanPolicy standardLoanPolicy = new StandardLoanPolicy();
+    LibrarySaver saver = new LibrarySaver(path, delimiter);
     Library library = new Library(standardLoanPolicy);
 
     // Bøger
@@ -22,7 +25,32 @@ void main() {
     library.addMember(new Member("Lise Andersen", 222));
     library.addMember(new Member("Peter Larsen", 333));
 
+    try {
+        //Gem ressourcer
+        saver.saveResource(library.getResources(), "resources.csv");
+        saver.saveBook(library.getResources(), "books.csv");
+        saver.saveAudiobook(library.getResources(), "audiobooks.csv");
+        saver.saveMovie(library.getResources(), "movies.csv");
+        saver.saveVideogame(library.getResources(), "videogames.csv");
 
+        // Gem medlemmer
+        saver.saveMember(library.getMembers(), "members.csv");
+
+        //Gem lån
+        saver.saveLoan(library.getLoans(), "loans.csv");
+
+    } catch (Exception e) {
+        IO.println("Kunne ikke gemme data: " + e.getMessage());
+
+        /*
+        tilhørende metoden ian ikke ville have vi brugte desv. :c
+        saver.saveResource(library.getResources(), Book.class, "books.csv");
+        saver.saveResource(library.getResources(), AudioBook.class, "audiobooks.csv");
+        saver.saveResource(library.getResources(), Movie.class, "movies.csv");
+        saver.saveResource(library.getResources(), VideoGame.class, "videogames.csv");
+        */
+
+    }
 
     // Start brugerfladen
     ConsoleUI consoleUI = new ConsoleUI(library);
