@@ -9,7 +9,7 @@ public class LoanTest {
     Book book;
     Member member;
     Loan loan;
-    LocalDate dueDate = LocalDate.now().plusDays(14);
+    LocalDate dueDate = LocalDate.now().plusDays(30);
     
     @BeforeEach
     void setupLoan(){

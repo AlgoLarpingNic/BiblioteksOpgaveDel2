@@ -18,7 +18,7 @@ public class Movie extends Resource {
 
     @Override
     public String toString() {
-        return getCreator() + "; " + getTitle() + "; ean " + getIdentifier()
-                + "; instruktør " + studio + "; (" + lengthMinutes + " min)";
+        return studio + "; " + getTitle() + "; ean " + getIdentifier()
+                + "; instruktør " + getCreator() + "; (" + lengthMinutes + " min)";
     }
 }

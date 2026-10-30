@@ -37,7 +37,7 @@ public class Loan {
     public String toString() {
         return resource + "\n"
                 + member + "\n"
-                + "afleveringsfrist " + dueDate;
+                + "afleveringsfrist " + getDueDate();
     }
 
 
