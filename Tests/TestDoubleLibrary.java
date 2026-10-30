@@ -14,7 +14,7 @@ public class TestDoubleLibrary {
         library.addResource(new Book("Forfatter", "Titel", "12345", 200));
 
         // Act
-        LoanResult result = library.loanResource("12345", 111);
+        LoanResult result = library.loanResource(111, "12345");
 
         // Assert
         assertEquals(LoanResult.SUCCESS, result);

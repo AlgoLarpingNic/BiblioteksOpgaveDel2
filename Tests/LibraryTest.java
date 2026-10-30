@@ -29,7 +29,7 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        LoanResult result = library.loanResource("80085", 111);
+        LoanResult result = library.loanResource(111, "80085");
 
         assertEquals(LoanResult.SUCCESS, result);
     }
@@ -40,7 +40,7 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        LoanResult result = library.loanResource("80085", 132);
+        LoanResult result = library.loanResource(132, "80085");
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }
@@ -62,8 +62,8 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        library.loanResource("80085", 111);
-        LoanResult result = library.loanResource("80085", 111);
+        library.loanResource(111, "80085");
+        LoanResult result = library.loanResource(111, "80085");
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }
@@ -74,11 +74,11 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        library.loanResource("80085", 111);
+        library.loanResource(111, "80085");
 
         library.returnResource("80085");
 
-        LoanResult result = library.loanResource("80085", 111);
+        LoanResult result = library.loanResource(111, "80085");
 
         assertEquals(LoanResult.SUCCESS, result);
     }
@@ -89,7 +89,7 @@ public class LibraryTest {
         library.addMember(member);
         library.addResource(book);
 
-        library.loanResource("80085", 111);
+        library.loanResource(111, "80085");
 
         boolean returnResult = library.returnResource("80085");
 

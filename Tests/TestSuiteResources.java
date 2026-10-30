@@ -49,7 +49,7 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     void loanDateMemberRegister() {
         assertEquals(loan.getMember(), member);
         assertEquals(loan.getMember().getMemberId(), member.getMemberId());
-        assertEquals(LocalDate.now().plusDays(14), duedate);
+        assertEquals(LocalDate.now().plusDays(30), duedate);
 
         Loan loanTest = new Loan(movie, member, duedate);
         loanTest.getLoanDate().minusDays(15);
@@ -64,6 +64,7 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     //BOOK
     @Test
     void bookConstructorAndGetters() {
+        constructor();
         assertEquals("Allan B. Drown inh", book.getCreator());
         assertEquals("Think Java", book.getTitle());
         assertEquals("0001", book.getIdentifier());
@@ -71,6 +72,7 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     }
     @Test
     void bookNotConstructorAndGetters() {
+        constructor();
         assertNotEquals("Allan B. Downey", book.getCreator());
         assertNotEquals("Think of Java", book.getTitle());
         assertNotEquals("97814", book.getIdentifier());
@@ -79,6 +81,7 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     //Audiobook
     @Test
     void audiobookConstructorAndGetters() {
+        constructor();
         assertEquals("Edith Inshide", audioBook.getCreator());
         assertEquals("Sapiens", audioBook.getTitle());
         assertEquals("0004", audioBook.getIdentifier());
@@ -86,6 +89,7 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     }
     @Test
     void audiobookNotConstructorAndGetters() {
+        constructor();
         assertNotEquals("Allan B. Downey", audioBook.getCreator());
         assertNotEquals("Think of Java", audioBook.getTitle());
         assertNotEquals("97814", audioBook.getIdentifier());
@@ -94,6 +98,7 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     //Movie
     @Test
     void movieConstructorAndGetters() {
+        constructor();
         assertEquals("John Issin", movie.getCreator());
         assertEquals("Toy Story", movie.getTitle());
         assertEquals("0005", movie.getIdentifier());
@@ -102,6 +107,7 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     }
     @Test
     void movieNotConstructorAndGetters() {
+        constructor();
         assertNotEquals("Allan B. Downey", movie.getCreator());
         assertNotEquals("Think of Java", movie.getTitle());
         assertNotEquals("97814", movie.getIdentifier());
@@ -111,6 +117,7 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     //Videogame
     @Test
     void videogameConstructorAndGetters() {
+        constructor();
         assertEquals("Nintendo", videoGame.getCreator());
         assertEquals("The Legend of Zelda", videoGame.getTitle());
         assertEquals("0006", videoGame.getIdentifier());
@@ -118,6 +125,7 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     }
     @Test
     void videogameNotConstructorAndGetters() {
+        constructor();
         assertNotEquals("Allan B. Downey", videoGame.getCreator());
         assertNotEquals("Think of Java", videoGame.getTitle());
         assertNotEquals("97814", videoGame.getIdentifier());
@@ -128,28 +136,25 @@ LocalDate duedate = LocalDate.now().plusDays(14);
     //LIBRARY FUNKTIONER/METODER
     @Test
     void testLoanWithMember() {
-        library.addMember(member);
-        library.addResource(book);
+        constructor();
 
-        LoanResult result = library.loanResource("0001", 69);
+        LoanResult result = library.loanResource(69, "0001");
 
         assertEquals(LoanResult.SUCCESS, result);
     }
 
     @Test
     void testLoanWithUnknownMember() {
-        library.addMember(member);
-        library.addResource(book);
+        constructor();
 
-        LoanResult result = library.loanResource("0001", 67);
+        LoanResult result = library.loanResource(69, "0001");
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }
 
     @Test
     void testWhenBookIsNotAvailable() {
-        library.addMember(member);
-        library.addResource(book);
+        constructor();
 
         LoanResult result = library.loanResource("FALSE", 69);
 
@@ -158,35 +163,32 @@ LocalDate duedate = LocalDate.now().plusDays(14);
 
     @Test
     void testLoanBookTwice() {
-        library.addMember(member);
-        library.addResource(book);
+        constructor();
 
-        library.loanResource("0001", 69);
-        LoanResult result = library.loanResource("0001", 69);
+        library.loanResource(69, "0001");
+        LoanResult result = library.loanResource(69, "0001");
 
         assertNotEquals(LoanResult.SUCCESS, result);
     }
 
     @Test
     void testOfLoanBookAfterReturn() {
-        library.addMember(member);
-        library.addResource(book);
+        constructor();
 
-        library.loanResource("0001", 69);
+        library.loanResource(69, "0001");
 
         library.returnResource("0001");
 
-        LoanResult result = library.loanResource("0001", 69);
+        LoanResult result = library.loanResource(69, "0001");
 
         assertEquals(LoanResult.SUCCESS, result);
     }
 
     @Test
     void testReturn(){
-        library.addMember(member);
-        library.addResource(book);
+        constructor();
 
-        library.loanResource("0001", 69);
+        library.loanResource(69, "0001");
 
         boolean returnResult = library.returnResource("0001");
 

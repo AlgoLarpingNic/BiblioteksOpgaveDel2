@@ -25,6 +25,10 @@ public class Loan {
         return loanDate;
     }
 
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
     public boolean isOverdue() {
         return LocalDate.now().isAfter(dueDate);
     }

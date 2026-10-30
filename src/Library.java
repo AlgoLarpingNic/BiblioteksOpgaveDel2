@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Library {
 
-    private List<Resource> resources = new ArrayList<>();
-    private List<Member> members = new ArrayList<>();
-    private List<Loan> loans = new ArrayList<>();
-    private LoanPolicy loanPolicy;
+    private final List<Resource> resources = new ArrayList<>();
+    private final List<Member> members = new ArrayList<>();
+    private final List<Loan> loans = new ArrayList<>();
+    private final LoanPolicy loanPolicy;
 
 
     public Library(LoanPolicy loanPolicy) {
@@ -53,30 +53,25 @@ public class Library {
     }
 
     // Lån ressource
-    public LoanResult loanResource(String identifier, int memberId) {
+    public LoanResult loanResource(int memberId, String identifier) {
         Member member = getMember(memberId);
         if (member == null) {
             return LoanResult.MEMBER_NOT_FOUND;
         }
-
         Resource resource = getResource(identifier);
         if (resource == null) {
             return LoanResult.RESOURCE_NOT_FOUND;
         }
-
         if (isResourceLoaned(identifier)) {
             return LoanResult.RESOURCE_NOT_AVAILABLE;
         }
-
         // Spørg policy om lånet er tilladt
         if (!loanPolicy.canLoan(resource, member, loans)) {
             return LoanResult.NOT_PERMITTED;
         }
-
         LocalDate dueDate = loanPolicy.calculateDueDate(resource);
         Loan loan = new Loan(resource, member, dueDate);
         loans.add(loan);
-
         return LoanResult.SUCCESS;
     }
 
@@ -89,7 +84,6 @@ public class Library {
                 break;
             }
         }
-
         if (loanToRemove != null) {
             loans.remove(loanToRemove);
             return true;

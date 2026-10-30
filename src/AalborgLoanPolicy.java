@@ -6,8 +6,8 @@ public class AalborgLoanPolicy implements LoanPolicy {
 
     @Override
     public boolean canLoan(Resource resource, Member member, List<Loan> currentLoans) {
-        if (resource instanceof Movie || resource instanceof VideoGame) {
-            return false;
+        if (!(resource instanceof Movie || resource instanceof VideoGame)) {
+            return true;
         }
 
         int eanCount = 0;
@@ -19,7 +19,7 @@ public class AalborgLoanPolicy implements LoanPolicy {
                 }
             }
         }
-        return eanCount <= eanLoanLimit;
+        return eanCount < eanLoanLimit;
     }
 
     @Override
