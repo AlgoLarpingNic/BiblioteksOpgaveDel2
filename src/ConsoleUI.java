@@ -47,6 +47,7 @@ public class ConsoleUI {
             case RESOURCE_NOT_FOUND -> IO.println("Intet fundet for indtastning: " + identifier);
             case RESOURCE_NOT_AVAILABLE -> IO.println("Matrialet er ikke tilgængeligt, formegentlig allerede udlånt");
         }
+
     }
 
     private void returnResource() {

@@ -6,10 +6,10 @@ public class Loan {
     private final LocalDate loanDate;
     private final LocalDate dueDate;
 
-    public Loan(Resource resource, Member member, LocalDate dueDate) {
+    public Loan(Resource resource, Member member, LocalDate dueDate, LocalDate loanDate) {
         this.resource = resource;
         this.member = member;
-        this.loanDate = LocalDate.now();
+        this.loanDate = loanDate;
         this.dueDate = dueDate;
     }
 

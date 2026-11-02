@@ -9,9 +9,13 @@ public class Library {
     private final LoanPolicy loanPolicy;
 
 
+
+
     public Library(LoanPolicy loanPolicy) {
         this.loanPolicy = loanPolicy;
     }
+
+
 
     //add metoder til oprettelse af ressourcer og members
     public void addResource(Resource resource) {
@@ -69,9 +73,10 @@ public class Library {
             return LoanResult.NOT_PERMITTED;
         }
         LocalDate dueDate = loanPolicy.calculateDueDate(resource);
-        Loan loan = new Loan(resource, member, dueDate);
+        Loan loan = new Loan(resource, member, dueDate, LocalDate.now());
         loans.add(loan);
         return LoanResult.SUCCESS;
+
     }
 
     // Aflever ressource
@@ -121,5 +126,8 @@ public class Library {
 
     public List<Loan> getLoans() {
         return loans;
+    }
+    public void addLoan(Loan loan){
+        loans.add(loan);
     }
 }
