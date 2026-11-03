@@ -26,7 +26,7 @@ LocalDate duedate = LocalDate.now().plusDays(30);
         movie = new Movie("John Issin", "Toy Story", "0005", "Pixar", 81);
         videoGame = new VideoGame("Nintendo", "The Legend of Zelda", "0006", "Nintendo Switch");
         member = new Member("Mike Oxlong", 69);
-        loan = new Loan(videoGame, member, duedate);
+        loan = new Loan(videoGame, member, duedate, LocalDate.now());
         loanPolicy = new StandardLoanPolicy();
         library = new Library(loanPolicy);
         library.addResource(book);
@@ -57,7 +57,7 @@ LocalDate duedate = LocalDate.now().plusDays(30);
         assertEquals(loan.getMember().getMemberId(), member.getMemberId());
         assertEquals(LocalDate.now().plusDays(30), loan.getDueDate());
 
-        Loan loanTest = new Loan(movie, member, duedate);
+        Loan loanTest = new Loan(movie, member, duedate, LocalDate.now());
         loanTest.getLoanDate().minusDays(15);
 
         boolean loanTestBool = true;

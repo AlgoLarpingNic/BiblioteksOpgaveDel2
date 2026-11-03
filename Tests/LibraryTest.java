@@ -19,7 +19,7 @@ public class LibraryTest {
         member = new Member("Mike Wazawski", 111);
         loanPolicy = new StandardLoanPolicy();
         library = new Library(loanPolicy);
-        loan = new Loan(book, member, dueDate);
+        loan = new Loan(book, member, dueDate, LocalDate.now());
 
     }
 

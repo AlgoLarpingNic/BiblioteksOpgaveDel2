@@ -15,7 +15,7 @@ public class LoanTest {
     void setupLoan(){
         book = new Book("Ben Clover", "Rolling off the deep end", "80085", 420);
         member = new Member("Mike Wazawski", 111);
-        loan = new Loan(book, member, dueDate);
+        loan = new Loan(book, member, dueDate, LocalDate.now());
 
     }
 

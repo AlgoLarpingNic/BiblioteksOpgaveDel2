@@ -15,7 +15,8 @@ public class LibrarySaver {
         Path path = Path.of(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Member member : members) {
-                writer.write(member.getMemberId() + delimiter + member.getName());
+                writer.write(member.getName() + delimiter
+                        + member.getMemberId());
                 writer.newLine();
             }
         }
@@ -24,7 +25,10 @@ public class LibrarySaver {
         Path path = Path.of(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Loan loan : loans) {
-                writer.write(loan.getMember().getMemberId() + delimiter + loan.getResource().getIdentifier() + delimiter + loan.getLoanDate() + delimiter + loan.getDueDate());
+                writer.write(loan.getResource().getIdentifier() + delimiter
+                        + loan.getMember().getMemberId() + delimiter
+                        + loan.getLoanDate() + delimiter
+                        + loan.getDueDate());
                 writer.newLine();
             }
         }
@@ -33,7 +37,9 @@ public class LibrarySaver {
         Path path = Path.of(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Resource resource : resources) {
-                writer.write((resource).getCreator() + delimiter + resource.getTitle() + delimiter + resource.getIdentifier());
+                writer.write((resource).getCreator() + delimiter
+                        + resource.getTitle() + delimiter
+                        + resource.getIdentifier());
                 writer.newLine();
             }
         }
@@ -43,7 +49,10 @@ public class LibrarySaver {
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Resource resource : resources) {
                 if (resource instanceof Book book) {
-                    writer.write(book.getCreator() + delimiter + book.getTitle() + delimiter + book.getIdentifier() + delimiter + book.getPages());
+                    writer.write(book.getCreator() + delimiter
+                            + book.getTitle() + delimiter
+                            + book.getIdentifier() + delimiter
+                            + book.getPages());
                     writer.newLine();
                 }
             }
@@ -54,7 +63,10 @@ public class LibrarySaver {
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Resource resource : resources) {
                 if (resource instanceof AudioBook audioBook) {
-                    writer.write(audioBook.getCreator() + delimiter + audioBook.getTitle() + delimiter + audioBook.getIdentifier() + delimiter + audioBook.getLengthMinutes());
+                    writer.write(audioBook.getCreator() + delimiter
+                            + audioBook.getTitle() + delimiter
+                            + audioBook.getIdentifier() + delimiter
+                            + audioBook.getLengthMinutes());
                     writer.newLine();
 
                 }
@@ -66,7 +78,11 @@ public class LibrarySaver {
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Resource resource : resources) {
                 if (resource instanceof Movie movie) {
-                    writer.write(movie.getStudio() + delimiter + movie.getCreator() + delimiter + movie.getTitle() + delimiter + movie.getIdentifier() + delimiter + movie.getLengthMinutes());
+                    writer.write(movie.getStudio() + delimiter
+                            + movie.getCreator() + delimiter
+                            + movie.getTitle() + delimiter
+                            + movie.getIdentifier() + delimiter
+                            + movie.getLengthMinutes());
                     writer.newLine();
                 }
             }
@@ -77,7 +93,10 @@ public class LibrarySaver {
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Resource resource : resources) {
                 if (resource instanceof VideoGame videoGame) {
-                    writer.write(videoGame.getCreator() + delimiter + videoGame.getTitle() + delimiter + videoGame.getIdentifier() + delimiter + videoGame.getPlatform());
+                    writer.write(videoGame.getCreator() + delimiter
+                            + videoGame.getTitle() + delimiter
+                            + videoGame.getIdentifier() + delimiter
+                            + videoGame.getPlatform());
                     writer.newLine();
                 }
 
