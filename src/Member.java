@@ -1,4 +1,4 @@
-public class Member {
+public class Member implements Comparable<Member>{
     private final String name;
     private final int memberId;
 
@@ -18,5 +18,10 @@ public class Member {
     @Override
     public String toString() {
         return name + " (Lånernummer: " + memberId + ")";
+    }
+
+    @Override
+    public int compareTo(Member other) {
+        return Integer.compare(memberId, other.memberId);
     }
 }

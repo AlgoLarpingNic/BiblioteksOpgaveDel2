@@ -1,5 +1,6 @@
-void main() {
-    Path path = Path.of("books.csv");
+void main() throws IOException {
+    Path path = Path.of("/csv_ting");
+    Files.createDirectories(path);
     String delimiter = ",";
     StandardLoanPolicy standardLoanPolicy = new StandardLoanPolicy();
     LibrarySaver saver = new LibrarySaver(path, delimiter);
@@ -27,21 +28,21 @@ void main() {
     library.addMember(new Member("Peter Larsen", 333));
 
     Loan loan1 = new Loan(library.getResource("0001"), library.getMember(111), LocalDate.now().plusDays(14), LocalDate.now());
-    library.getLoans().add(loan1);
+    library.addLoan(loan1);
 
     try {
         //Gem ressourcer
-        saver.saveResource(library.getResources(), "resources.csv");
-        saver.saveBook(library.getResources(), "books.csv");
-        saver.saveAudiobook(library.getResources(), "audiobooks.csv");
-        saver.saveMovie(library.getResources(), "movies.csv");
-        saver.saveVideogame(library.getResources(), "videogames.csv");
+        saver.saveResource(library.getResources(), path + "/resources.csv");
+        saver.saveBook(library.getResources(), path + "/books.csv");
+        saver.saveAudiobook(library.getResources(), path + "/audiobooks.csv");
+        saver.saveMovie(library.getResources(), path + "/movies.csv");
+        saver.saveVideogame(library.getResources(), path + "/videogames.csv");
 
         // Gem medlemmer
-        saver.saveMember(library.getMembers(), "members.csv");
+        saver.saveMember(library.getMembers(), path + "/members.csv");
 
         //Gem lån
-        saver.saveLoan(library.getLoans(), "loans.csv");
+        saver.saveLoan(library.getLoans(), path + "/loans.csv");
 
     } catch (Exception e) {
         IO.println("Kunne ikke gemme data: " + e.getMessage());
@@ -49,7 +50,27 @@ void main() {
 
 
     try {
-        IO.print(loader.readBook());
+        IO.println(loader.readBook());
+    } catch (Exception e) {
+        IO.println("nej");
+    }
+    try {
+        IO.println(loader.readLoans(library));
+    } catch (Exception e) {
+        IO.println("nej");
+    }
+    try {
+        IO.println(loader.readMember());
+    } catch (Exception e) {
+        IO.println("nej");
+    }
+    try {
+        IO.println(loader.readAudiobook());
+    } catch (Exception e) {
+        IO.println("nej");
+    }
+    try {
+        IO.println(loader.readMovie());
     } catch (Exception e) {
         IO.println("nej");
     }

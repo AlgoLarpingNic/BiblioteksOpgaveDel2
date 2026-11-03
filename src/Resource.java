@@ -1,4 +1,4 @@
-public abstract class Resource {
+public abstract class Resource implements Comparable<Resource>{
     private final String creator;
     private final String title;
     private final String identifier;
@@ -24,5 +24,10 @@ public abstract class Resource {
     @Override
     public String toString() {
         return creator + "; " + title + "; " + identifier;
+    }
+
+    @Override
+    public int compareTo(Resource other) {
+        return this.identifier.compareTo(other.identifier);
     }
 }

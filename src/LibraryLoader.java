@@ -20,7 +20,7 @@ public class LibraryLoader {
     }
     public List<Book> readBook() throws IOException {
         List<Book> booksLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
+        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/books.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Book book = bookFromCsv(line);
@@ -28,6 +28,54 @@ public class LibraryLoader {
             }
         }
         return booksLoaded;
+    }
+
+    public AudioBook audiobookFromCsv(String line) {
+        String[] fields = line.split(delimiter, -1);
+        return new AudioBook(fields[0], fields[1], fields[2], Integer.parseInt(fields[3]));
+    }
+    public List<AudioBook> readAudiobook() throws IOException {
+        List<AudioBook> audiobooksLoaded = new ArrayList<>();
+        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/audiobooks.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                AudioBook audioBook = audiobookFromCsv(line);
+                audiobooksLoaded.add(audioBook);
+            }
+        }
+        return audiobooksLoaded;
+    }
+
+    public Movie moviesFromCSV(String line) {
+        String[] fields = line.split(delimiter, -1);
+        return new Movie(fields[0], fields[1], fields[2], fields[3], Integer.parseInt(fields[4]));
+    }
+    public List<Movie> readMovie() throws IOException {
+        List<Movie> moviesLoaded = new ArrayList<>();
+        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/movies.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Movie movie = moviesFromCSV(line);
+                moviesLoaded.add(movie);
+            }
+        }
+        return moviesLoaded;
+    }
+
+    public Member memberFromCSV(String line) {
+        String[] fields = line.split(delimiter, -1);
+        return new Member(fields[0], Integer.parseInt(fields[1]));
+    }
+    public List<Member> readMember() throws IOException {
+        List<Member> membersLoaded = new ArrayList<>();
+        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/members.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Member member = memberFromCSV(line);
+                membersLoaded.add(member);
+            }
+        }
+        return membersLoaded;
     }
 
     public Loan loansFromCSV(String line, Library library) {
@@ -48,7 +96,7 @@ public class LibraryLoader {
     }
     public List<Loan> readLoans(Library library) throws IOException {
         List<Loan> loansLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
+        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/loans.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Loan loan = loansFromCSV(line, library);
@@ -56,55 +104,6 @@ public class LibraryLoader {
             }
         }
         return loansLoaded;
-    }
-
-    public AudioBook audiobookFromCsv(String line) {
-        String[] fields = line.split(delimiter, -1);
-        return new AudioBook(fields[0], fields[1], fields[2], Integer.parseInt(fields[3]));
-    }
-    public List<AudioBook> readAudiobook() throws IOException {
-        List<AudioBook> audiobooksLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                AudioBook audioBook = audiobookFromCsv(line);
-                audiobooksLoaded.add(audioBook);
-            }
-        }
-        return audiobooksLoaded;
-    }
-
-    public Movie moviesFromCSV(String line) {
-        String[] fields = line.split(delimiter, -1);
-        return new Movie(fields[0], fields[1], fields[2], fields[3], Integer.parseInt(fields[4]));
-    }
-    public List<Movie> readMovie() throws IOException {
-        List<Movie> moviesLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Movie movie = moviesFromCSV(line);
-                moviesLoaded.add(movie);
-            }
-        }
-        return moviesLoaded;
-
-    }
-
-    public Member memberFromCSV(String line) {
-        String[] fields = line.split(delimiter, -1);
-        return new Member(fields[0], Integer.parseInt(fields[1]));
-    }
-    public List<Member> readMember() throws IOException {
-        List<Member> membersLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Member member = memberFromCSV(line);
-                membersLoaded.add(member);
-            }
-        }
-        return membersLoaded;
     }
 
 }
