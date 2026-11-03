@@ -7,6 +7,9 @@ void main() throws IOException {
     Library library = new Library(standardLoanPolicy);
     LibraryLoader loader = new LibraryLoader(path);
 
+    Collator SvCollator = Collator.getInstance(new Locale("sv"));
+
+
     // Bøger
     library.addResource(new Book("Allan B. Drown inh", "Think Java", "0001", 320));
     library.addResource(new Book("Rachel Cusk", "Omrids", "0002", 256));
@@ -74,6 +77,11 @@ void main() throws IOException {
     } catch (Exception e) {
         IO.println("nej");
     }
+
+    library.getLoans().sort(null);
+    IO.println(library.getResources());
+    Collections.sort(library.getResources(), new ResourceCreatorComparator());
+    IO.println(library.getResources());
         /*
         tilhørende metoden ian ikke ville have vi brugte desv. :c
         saver.saveResource(library.getResources(), Book.class, "books.csv");
