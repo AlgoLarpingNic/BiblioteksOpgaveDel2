@@ -7,7 +7,6 @@ void main() throws IOException {
     Library library = new Library(standardLoanPolicy);
     LibraryLoader loader = new LibraryLoader(path);
 
-    Collator SvCollator = Collator.getInstance(new Locale("sv"));
 
 
     // Bøger
@@ -78,9 +77,11 @@ void main() throws IOException {
         IO.println("nej");
     }
 
+    Collator SvCollator = Collator.getInstance(new Locale("sv"));
+
     library.getLoans().sort(null);
     IO.println(library.getResources());
-    Collections.sort(library.getResources(), new ResourceCreatorComparator());
+    library.getResources().sort((SvCollator));
     IO.println(library.getResources());
         /*
         tilhørende metoden ian ikke ville have vi brugte desv. :c
