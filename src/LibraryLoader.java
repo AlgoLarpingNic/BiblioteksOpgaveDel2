@@ -48,7 +48,7 @@ public class LibraryLoader {
 
     public Movie moviesFromCSV(String line) {
         String[] fields = line.split(delimiter, -1);
-        return new Movie(fields[0], fields[2], fields[1], fields[3], Integer.parseInt(fields[4]));
+        return new Movie(fields[0], fields[1], fields[3], fields[2], Integer.parseInt(fields[4]));
     }
     public List<Movie> readMovie() throws IOException {
         List<Movie> moviesLoaded = new ArrayList<>();

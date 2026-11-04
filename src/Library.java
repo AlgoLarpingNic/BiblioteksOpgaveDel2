@@ -122,7 +122,9 @@ public class Library {
     public List<Loan> getLoans() {
         return loans;
     }
-    public void addLoan(Loan loan){
-        loans.add(loan);
+    public void addLoan(Loan loan) {
+        if (loan != null && loan.getResource() != null && loan.getMember() != null) {
+            loans.add(loan);
+        }
     }
 }
