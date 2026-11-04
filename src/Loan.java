@@ -22,11 +22,11 @@ public class Loan implements Comparable<Loan>{
     }
 
     public LocalDate getLoanDate() {
-        return LocalDate.now();
+        return loanDate;
     }
 
     public LocalDate getDueDate() {
-        return getLoanDate().plusDays(30);
+        return dueDate;
     }
 
     public boolean isOverdue() {

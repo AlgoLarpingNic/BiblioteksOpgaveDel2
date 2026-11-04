@@ -4,15 +4,15 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class LibrarySaver {
-    private Path path;
+    private final Path path;
     private final String delimiter = ",";
 
-    public LibrarySaver(Path path, String delimiter){
+    public LibrarySaver(Path path){
         this.path = path;
     }
 
     public void saveMember(List<Member> members, String fileName) throws Exception {
-        Path path = Path.of(fileName);
+        Path path = this.path.resolve(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Member member : members) {
                 writer.write(member.getName() + delimiter
@@ -22,7 +22,7 @@ public class LibrarySaver {
         }
     }
     public void saveLoan(List<Loan> loans, String fileName) throws Exception {
-        Path path = Path.of(fileName);
+        Path path = this.path.resolve(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Loan loan : loans) {
                 writer.write(loan.getResource().getIdentifier() + delimiter
@@ -34,7 +34,7 @@ public class LibrarySaver {
         }
     }
     public void saveResource(List<Resource> resources, String fileName) throws Exception {
-        Path path = Path.of(fileName);
+        Path path = this.path.resolve(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Resource resource : resources) {
                 writer.write((resource).getCreator() + delimiter
@@ -45,7 +45,7 @@ public class LibrarySaver {
         }
     }
     public void saveBook(List<Resource> resources, String fileName) throws Exception {
-        Path path = Path.of(fileName);
+        Path path = this.path.resolve(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Resource resource : resources) {
                 if (resource instanceof Book book) {
@@ -78,10 +78,10 @@ public class LibrarySaver {
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Resource resource : resources) {
                 if (resource instanceof Movie movie) {
-                    writer.write(movie.getStudio() + delimiter
-                            + movie.getCreator() + delimiter
+                    writer.write(movie.getCreator() + delimiter
                             + movie.getTitle() + delimiter
                             + movie.getIdentifier() + delimiter
+                            + movie.getDirector() + delimiter
                             + movie.getLengthMinutes());
                     writer.newLine();
                 }

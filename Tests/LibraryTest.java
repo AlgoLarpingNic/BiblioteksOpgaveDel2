@@ -10,7 +10,7 @@ public class LibraryTest {
     Book book;
     Library library;
     Loan loan;
-    LoanPolicy loanPolicy;
+    StandardLoanPolicy loanPolicy;
 
     LocalDate dueDate = LocalDate.now().plusDays(30);
     @BeforeEach

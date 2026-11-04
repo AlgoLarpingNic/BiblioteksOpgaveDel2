@@ -80,6 +80,7 @@ public class ConsoleUI {
         if (overdue.isEmpty()) {
             IO.println("Ingen overskredne lån");
         } else {
+            overdue.sort(null);
             for (Loan loan : overdue) {
                 IO.println(loan);
                 IO.println();

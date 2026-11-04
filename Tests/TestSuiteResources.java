@@ -12,7 +12,7 @@ VideoGame videoGame;
 
 Member member;
 Loan loan;
-LoanPolicy loanPolicy;
+StandardLoanPolicy loanPolicy;
 
 Library library;
 
@@ -55,7 +55,7 @@ LocalDate duedate = LocalDate.now().plusDays(30);
         constructor();
         assertEquals(loan.getMember(), member);
         assertEquals(loan.getMember().getMemberId(), member.getMemberId());
-        assertEquals(LocalDate.now().plusDays(30), loan.getDueDate());
+        assertEquals(LocalDate.now().plusDays(30), loanPolicy.calculateDueDate(movie));
 
         Loan loanTest = new Loan(movie, member, duedate, LocalDate.now());
         loanTest.getLoanDate().minusDays(15);
@@ -108,7 +108,7 @@ LocalDate duedate = LocalDate.now().plusDays(30);
         assertEquals("John Issin", movie.getCreator());
         assertEquals("Toy Story", movie.getTitle());
         assertEquals("0005", movie.getIdentifier());
-        assertEquals("Pixar", movie.getStudio());
+        assertEquals("Pixar", movie.getDirector());
         assertEquals(81, movie.getLengthMinutes());
     }
     @Test
@@ -117,7 +117,7 @@ LocalDate duedate = LocalDate.now().plusDays(30);
         assertNotEquals("Allan B. Downey", movie.getCreator());
         assertNotEquals("Think of Java", movie.getTitle());
         assertNotEquals("97814", movie.getIdentifier());
-        assertNotEquals("20'th Century", movie.getStudio());
+        assertNotEquals("20'th Century", movie.getDirector());
         assertNotEquals(67, movie.getLengthMinutes());
     }
     //Videogame
