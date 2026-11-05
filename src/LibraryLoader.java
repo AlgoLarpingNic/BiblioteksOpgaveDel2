@@ -20,7 +20,7 @@ public class LibraryLoader {
     }
     public List<Book> readBook() throws IOException {
         List<Book> booksLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/books.csv"))) {
+        try (BufferedReader reader = Files.newBufferedReader(path.resolve("books.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Book book = bookFromCsv(line);
@@ -36,7 +36,7 @@ public class LibraryLoader {
     }
     public List<AudioBook> readAudiobook() throws IOException {
         List<AudioBook> audiobooksLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/audiobooks.csv"))) {
+        try (BufferedReader reader = Files.newBufferedReader(path.resolve("audiobooks.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 AudioBook audioBook = audiobookFromCsv(line);
@@ -48,11 +48,11 @@ public class LibraryLoader {
 
     public Movie moviesFromCSV(String line) {
         String[] fields = line.split(delimiter, -1);
-        return new Movie(fields[0], fields[1], fields[2], fields[3], Integer.parseInt(fields[4]));
+        return new Movie(fields[0], fields[1], fields[3], fields[2], Integer.parseInt(fields[4]));
     }
     public List<Movie> readMovie() throws IOException {
         List<Movie> moviesLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/movies.csv"))) {
+        try (BufferedReader reader = Files.newBufferedReader(path.resolve("movies.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Movie movie = moviesFromCSV(line);
@@ -62,13 +62,29 @@ public class LibraryLoader {
         return moviesLoaded;
     }
 
+    public VideoGame videogamesFromCSV(String line) {
+        String[] fields = line.split(delimiter, -1);
+        return new VideoGame(fields[0], fields[1], fields[2], fields[3]);
+    }
+    public List<VideoGame> readVideogame() throws IOException {
+        List<VideoGame> videoGamesLoaded = new ArrayList<>();
+        try (BufferedReader reader = Files.newBufferedReader(path.resolve("videogames.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                VideoGame videogame = videogamesFromCSV(line);
+                videoGamesLoaded.add(videogame);
+            }
+        }
+        return videoGamesLoaded;
+    }
+
     public Member memberFromCSV(String line) {
         String[] fields = line.split(delimiter, -1);
         return new Member(fields[0], Integer.parseInt(fields[1]));
     }
     public List<Member> readMember() throws IOException {
         List<Member> membersLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/members.csv"))) {
+        try (BufferedReader reader = Files.newBufferedReader(path.resolve("members.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Member member = memberFromCSV(line);
@@ -85,18 +101,18 @@ public class LibraryLoader {
         Member member = library.getMember(Integer.parseInt(fields[1]));
 
         if (resource == null || member == null){
-            throw new IllegalArgumentException("Unkown member or resource in csv file.");
+            IO.println("Unkown member or resource in csv file.");
+            return null;
         }
         LocalDate loanDate = LocalDate.parse(fields[2]);
         LocalDate dueDate = LocalDate.parse(fields[3]);
 
         //Member
-
         return new Loan(resource, member, loanDate, dueDate);
     }
     public List<Loan> readLoans(Library library) throws IOException {
         List<Loan> loansLoaded = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/loans.csv"))) {
+        try (BufferedReader reader = Files.newBufferedReader(path.resolve("loans.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Loan loan = loansFromCSV(line, library);
