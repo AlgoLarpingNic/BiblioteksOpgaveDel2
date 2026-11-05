@@ -61,6 +61,21 @@ public class LibraryLoader {
         }
         return moviesLoaded;
     }
+    public VideoGame videoGameFromCSV(String line) {
+        String[] fields = line.split(delimiter, -1);
+        return new VideoGame(fields[0], fields[1], fields[2], fields[3]);
+    }
+    public List<VideoGame> readVideoGame() throws IOException {
+        List<VideoGame> videoGamesLoaded = new ArrayList<>();
+        try (BufferedReader reader = Files.newBufferedReader(Path.of(path + "/videogames.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                VideoGame videoGame = videoGameFromCSV(line);
+                videoGamesLoaded.add(videoGame);
+            }
+        }
+        return videoGamesLoaded;
+    }
 
     public VideoGame videogamesFromCSV(String line) {
         String[] fields = line.split(delimiter, -1);

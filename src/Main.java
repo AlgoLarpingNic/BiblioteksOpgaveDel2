@@ -5,16 +5,12 @@ void main() throws IOException {
     LibrarySaver saver = new LibrarySaver(path);
     LibraryLoader loader = new LibraryLoader(path);
 
-    LoanPolicy loanPolicy = new StandardLoanPolicy();
-    Library library = new Library(loanPolicy);
 
-    if (library.getResources().isEmpty() && library.getMembers().isEmpty()) {
-        IO.println("Ingen data fundet, opretter filer");
 
-        // Medlemmer
-        library.addMember(new Member("Thorkild Hansen", 111));
-        library.addMember(new Member("Lise Andersen", 222));
-        library.addMember(new Member("Peter Larsen", 333));
+    // Bøger
+    library.addResource(new Book("Allan B. Drown inh", "Think Java", "0001", 320));
+    library.addResource(new Book("Rachel Cusk", "Omrids", "0002", 256));
+    library.addResource(new Book("Edith Inshide", "Sapiens", "0003", 443));
 
         // Bøger
         library.addResource(new Book("Allan B. Downey", "Think Java", "0001", 450));
@@ -57,35 +53,29 @@ void main() throws IOException {
     }
 
     try {
-        // Bøger
-        for (Book book : loader.readBook()) {
-            library.addResource(book);
-        }
-        // Lydbøger
-        for (AudioBook audioBook : loader.readAudiobook()) {
-            library.addResource(audioBook);
-        }
-        // Film
-        for (Movie movie : loader.readMovie()) {
-            library.addResource(movie);
-        }
-        // Videospil
-        for (VideoGame videoGame : loader.readVideogame()) {
-            library.addResource(videoGame);
-        }
-        // Medlemmer
-        for (Member member : loader.readMember()) {
-            library.addMember(member);
-        }
-        // Lån
-        for (Loan loan : loader.readLoans(library)) {
-            library.addLoan(loan);
-        }
-        IO.println("Data indlæst korrekt.");
-    } catch (IOException e){
-        IO. println("Kunne ikke indlæse alle filer: " + e.getMessage());
-        }
+        IO.println(loader.readAudiobook());
+    } catch (Exception e) {
+        IO.println("nej");
+    }
+    try {
+        IO.println(loader.readMovie());
+    } catch (Exception e) {
+        IO.println("nej");
+    }
 
+    Collator SvCollator = Collator.getInstance(new Locale("sv"));
+
+    library.getLoans().sort(null);
+    IO.println(library.getResources());
+    library.getResources().sort((SvCollator));
+    IO.println(library.getResources());
+        /*
+        tilhørende metoden ian ikke ville have vi brugte desv. :c
+        saver.saveResource(library.getResources(), Book.class, "books.csv");
+        saver.saveResource(library.getResources(), AudioBook.class, "audiobooks.csv");
+        saver.saveResource(library.getResources(), Movie.class, "movies.csv");
+        saver.saveResource(library.getResources(), VideoGame.class, "videogames.csv");
+        */
 
 
     ConsoleUI consoleUI = new ConsoleUI(library);
