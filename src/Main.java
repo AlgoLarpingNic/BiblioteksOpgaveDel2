@@ -48,7 +48,7 @@ void main() throws IOException {
         // Gem medlemmer
         saver.saveMember(library.getMembers(), "members.csv");
 
-        // Gem lån
+        // Gem lånasd
         saver.saveLoan(library.getLoans(), "loans.csv");
 
         IO.println("Data gemt korrekt." + "\n" + loader.readBook() + "\n" + loader.readAudiobook() + "\n" + loader.readMovie() + "\n" + loader.readVideogame() + "\n" + loader.readMember() + "\n" + loader.readLoans(library));
