@@ -1,10 +1,8 @@
 void main() throws IOException {
-    Path path = Path.of("/csv_ting");
+    Path path = Path.of("csv_ting");
     Files.createDirectories(path);
-    String delimiter = ",";
-    StandardLoanPolicy standardLoanPolicy = new StandardLoanPolicy();
-    LibrarySaver saver = new LibrarySaver(path, delimiter);
-    Library library = new Library(standardLoanPolicy);
+
+    LibrarySaver saver = new LibrarySaver(path);
     LibraryLoader loader = new LibraryLoader(path);
 
 
@@ -14,58 +12,46 @@ void main() throws IOException {
     library.addResource(new Book("Rachel Cusk", "Omrids", "0002", 256));
     library.addResource(new Book("Edith Inshide", "Sapiens", "0003", 443));
 
-    // Lydbøger
-    library.addResource(new AudioBook("Edith Inshide", "Sapiens", "0004", 900));
+        // Bøger
+        library.addResource(new Book("Allan B. Downey", "Think Java", "0001", 450));
+        library.addResource(new Book("Rachel Cusk", "Omrids", "0002", 280));
+        library.addResource(new Book("Yuval Noah Harari", "Sapiens", "0003", 512));
 
-    // Film
-    library.addResource(new Movie("John Issin", "Toy Story", "0005", "Pixar", 81));
+        // Lydbøger
+        library.addResource(new AudioBook("Rachel Cusk", "Omridset", "0004", 900));
 
-    // Videospil
-    library.addResource(new VideoGame("Nintendo", "The Legend of Zelda", "0006", "Nintendo Switch"));
+        //film
+        library.addResource(new Movie("Pixar", "Toy Story", "Guy Richie", "0005", 123));
+
+        //videospil
+        library.addResource(new VideoGame("Nintendo", "Super Smash", "0006", "Nintendo switch"));
+
+        Loan loan = new Loan(library.getResource("0001"), library.getMember(111), LocalDate.now(), LocalDate.now().plusDays(30));
+        library.addLoan(loan);
 
 
-    // Medlemmer
-    library.addMember(new Member("Thorkild Hansen", 111));
-    library.addMember(new Member("Lise Andersen", 222));
-    library.addMember(new Member("Peter Larsen", 333));
-
-    Loan loan1 = new Loan(library.getResource("0001"), library.getMember(111), LocalDate.now().plusDays(14), LocalDate.now());
-    library.addLoan(loan1);
+        IO.println("Eksempeldata oprettet.");
+    }
 
     try {
         //Gem ressourcer
-        saver.saveResource(library.getResources(), path + "/resources.csv");
-        saver.saveBook(library.getResources(), path + "/books.csv");
-        saver.saveAudiobook(library.getResources(), path + "/audiobooks.csv");
-        saver.saveMovie(library.getResources(), path + "/movies.csv");
-        saver.saveVideogame(library.getResources(), path + "/videogames.csv");
+        saver.saveResource(library.getResources(), "resources.csv");
+        saver.saveBook(library.getResources(), "books.csv");
+        saver.saveAudiobook(library.getResources(), "audiobooks.csv");
+        saver.saveMovie(library.getResources(), "movies.csv");
+        saver.saveVideogame(library.getResources(), "videogames.csv");
 
         // Gem medlemmer
-        saver.saveMember(library.getMembers(), path + "/members.csv");
+        saver.saveMember(library.getMembers(), "members.csv");
 
-        //Gem lån
-        saver.saveLoan(library.getLoans(), path + "/loans.csv");
+        // Gem lån
+        saver.saveLoan(library.getLoans(), "loans.csv");
 
+        IO.println("Data gemt korrekt." + "\n" + loader.readBook() + "\n" + loader.readAudiobook() + "\n" + loader.readMovie() + "\n" + loader.readVideogame() + "\n" + loader.readMember() + "\n" + loader.readLoans(library));
     } catch (Exception e) {
         IO.println("Kunne ikke gemme data: " + e.getMessage());
     }
 
-
-    try {
-        IO.println(loader.readBook());
-    } catch (Exception e) {
-        IO.println("nej");
-    }
-    try {
-        IO.println(loader.readLoans(library));
-    } catch (Exception e) {
-        IO.println("nej");
-    }
-    try {
-        IO.println(loader.readMember());
-    } catch (Exception e) {
-        IO.println("nej");
-    }
     try {
         IO.println(loader.readAudiobook());
     } catch (Exception e) {
@@ -92,7 +78,7 @@ void main() throws IOException {
         */
 
 
-    // Start brugerfladen
     ConsoleUI consoleUI = new ConsoleUI(library);
     consoleUI.run();
+
 }

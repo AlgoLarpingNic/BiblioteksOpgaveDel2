@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.List;
 
-public class TestDoubleLoanPolicy implements LoanPolicy{
+public class TestDoubleLoanPolicy extends StandardLoanPolicy{
     public boolean canLoanCalled = false;
     public boolean calculateDueDateCalled = false;
 
